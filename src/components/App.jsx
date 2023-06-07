@@ -18,25 +18,31 @@ export const App = () => {
 
     switch (name) {
       case 'good':
-        return setGood(prevState => prevState + 1);
+        setGood(prevState => prevState + 1);
+        break;
       case 'neutral':
-        return setNeutral(prevState => prevState + 1);
+        setNeutral(prevState => prevState + 1);
+        break;
       case 'bad':
-        return setBad(prevState => prevState + 1);
+        setBad(prevState => prevState + 1);
+        break;
       default:
+        return;
     }
-  };
+  }
 
    useEffect(() => {
-    setTotal(total => good + bad + neutral)
-  });
+     setTotal(total => good + bad + neutral);
+   }, [good, neutral, bad]);
 
   useEffect(() => {
     if (good === 0) {
       return;
     }
-    setPositivePercentage(positivePercentage => Number(((good / total) * 100).toFixed()));
-  });
+    setPositivePercentage(positivePercentage =>
+      Number(((good / total) * 100).toFixed())
+    );
+  }, [good, total]);
 
     return (
       <Layout>
